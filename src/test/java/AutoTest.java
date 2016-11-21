@@ -149,5 +149,6 @@ public class AutoTest {
     @After
     public void stopBrowser() {
         steps.closeDriver();
+        logger.info("Stop browser");
     }
 }

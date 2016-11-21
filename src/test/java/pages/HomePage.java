@@ -1,5 +1,7 @@
 package pages;
 
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 import org.junit.Test;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -18,6 +20,7 @@ import java.util.concurrent.TimeUnit;
  */
 public class HomePage extends AbstractPage {
 
+    private final Logger logger = LogManager.getRootLogger();
     private final Wait<WebDriver> wait = new WebDriverWait(driver, 10);
     @FindBy(xpath = "id('profile-sub-nav')/li[1]")
     private WebElement linkProfile;
@@ -103,15 +106,16 @@ public class HomePage extends AbstractPage {
 
     public void clickToButtonChooseImmage() {
         buttonChooseImage.click();
+        logger.debug("Click Button Choose image");
     }
 
     public void clickChooseImage(){
         waitForPageLoaded(driver);
         uploadFileInput.sendKeys(System.getProperty("user.dir") + "\\img\\12345.jpg");
-        wait.until(ExpectedConditions.elementToBeClickable(submitUploadFileInput));
-        wait.until(ExpectedConditions.elementToBeClickable(submitUploadFileInput));
-        submitUploadFileInput.click();
+        logger.debug("Image loaded");
         waitForPageLoaded(driver);
+        submitUploadFileInput.click();
+        logger.debug("Image save");
     }
 
     public boolean isAddedImage(){
