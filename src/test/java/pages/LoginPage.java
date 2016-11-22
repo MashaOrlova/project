@@ -2,6 +2,7 @@ package pages;
 
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -22,7 +23,7 @@ public class LoginPage extends AbstractPage {
     @FindBy(id = "login-submit")
     private WebElement buttonSubmit;
 
-    @FindBy(xpath = "//a[text()='Pavel Zhavoronok']")
+    //@FindBy(xpath = "//a[text()='Pavel Zhavoronok']")
     private WebElement linkLoggedInUser;
 
     @FindBy(xpath = "id('account-sub-nav')//span/a[@class = 'account-submenu-split-link']")
@@ -66,7 +67,8 @@ public class LoginPage extends AbstractPage {
         waitForPageLoaded(driver);
     }
 
-    public String isLogIn(){
+    public String isLogIn(String username){
+        linkLoggedInUser = driver.findElement(By.xpath("//a[text()='"+ username +"']"));
         return  linkLoggedInUser.getText();
     }
 

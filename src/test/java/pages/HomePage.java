@@ -109,9 +109,9 @@ public class HomePage extends AbstractPage {
         logger.debug("Click Button Choose image");
     }
 
-    public void clickChooseImage(){
+    public void clickChooseImage(String image){
         waitForPageLoaded(driver);
-        uploadFileInput.sendKeys(System.getProperty("user.dir") + "\\img\\12345.jpg");
+        uploadFileInput.sendKeys(System.getProperty("user.dir") + image);
         logger.debug("Image loaded");
         waitForPageLoaded(driver);
         submitUploadFileInput.click();
@@ -136,7 +136,7 @@ public class HomePage extends AbstractPage {
     public void searchForPeople(String name){
         inputSearchPeople.sendKeys(name);
         buttonSearch.click();
-        wait.until(ExpectedConditions.elementToBeClickable(resultSearch));
+        waitForElementLoaded(resultSearch);
         resultSearch.click();
     }
 
@@ -145,14 +145,14 @@ public class HomePage extends AbstractPage {
     }
 
    public void writeAnArticle(String message, String headline){
-       wait.until(ExpectedConditions.elementToBeClickable(inputHeadline));
+       waitForElementLoaded(inputHeadline);
        waitForPageLoaded(driver);
        inputHeadline.sendKeys(headline);
        inputMessage.click();
        inputMessage.sendKeys(message);
        waitForPageLoaded(driver);
        buttonPublish.click();
-       wait.until(ExpectedConditions.elementToBeClickable(buttonConfirmationPublish));
+       waitForElementLoaded(buttonConfirmationPublish);
        buttonConfirmationPublish.click();
    }
 
@@ -162,25 +162,25 @@ public class HomePage extends AbstractPage {
     }
 
     public void removeNewPost(){
-        ((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView();", scrollPostContainer);
+        scrollToPage(scrollPostContainer);
         linkAddedPost.click();
-        wait.until(ExpectedConditions.elementToBeClickable(buttonEditArticle));
+        waitForElementLoaded(buttonEditArticle);
         buttonEditArticle.click();
-        wait.until(ExpectedConditions.elementToBeClickable(buttonMore));
+        waitForElementLoaded(buttonMore);
         buttonMore.click();
-        wait.until(ExpectedConditions.elementToBeClickable(linkArticle));
+        waitForElementLoaded(linkArticle);
         linkArticle.click();
-        wait.until(ExpectedConditions.elementToBeClickable(buttonDeletePost));
+        waitForElementLoaded(buttonDeletePost);
         buttonDeletePost.click();
-        wait.until(ExpectedConditions.elementToBeClickable(buttonConfirmationDeletePost));
+        waitForElementLoaded(buttonConfirmationDeletePost);
         buttonConfirmationDeletePost.click();
         waitForPageLoaded(driver);
     }
 
     public boolean deletedNewPost(){
-        wait.until(ExpectedConditions.elementToBeClickable(buttonMore));
+        waitForElementLoaded(buttonMore);
         buttonMore.click();
-        wait.until(ExpectedConditions.elementToBeClickable(linkArticle));
+        waitForElementLoaded(linkArticle);
         linkArticle.click();
         return spanArticlesNotFound.isDisplayed();
     }

@@ -36,7 +36,7 @@ public class Steps {
 
     public boolean isLoggedIn(String name) {
         LoginPage loginPage = new LoginPage(driver);
-        return loginPage.isLogIn().equals(name);
+        return loginPage.isLogIn(name).equals(name);
     }
 
     public boolean isLoggedOut(String string){
@@ -55,11 +55,11 @@ public class Steps {
         return loginPage.foundTheName().equals(firstname + " " + lastname);
     }
 
-    public void loadingImage(){
+    public void loadingImage(String imagePath){
         HomePage homePage = new HomePage(driver);
         homePage.openPage(PAGE_URL);
         homePage.clickToButtonChooseImmage();
-        homePage.clickChooseImage();
+        homePage.clickChooseImage(imagePath);
     }
 
     public boolean isAddedImage(){
@@ -140,7 +140,7 @@ public class Steps {
         settingPage.setLanguageEnglish(indexLanguageEnglish);
     }
 
-    public void searchForPeaple(String name){
+    public void searchForPeople(String name){
         HomePage homePage = new HomePage(driver);
         homePage.openPage(PAGE_URL);
         homePage.searchForPeople(name);
@@ -175,16 +175,16 @@ public class Steps {
         return homePage.deletedNewPost();
     }
 
-    public void addNewFollower(){
+    public void addNewFollowing(String name){
         ProfilePage profilePage = new ProfilePage(driver);
         profilePage.openPage(PAGE_URL);
-        profilePage.addFollower();
+        profilePage.addFollowing(name);
     }
 
-    public boolean isAddedFollower(){
+    public boolean isAddedFollowing(String name){
         ProfilePage profilePage = new ProfilePage(driver);
         profilePage.openPage(PAGE_URL);
-        return profilePage.isAddedFollower();
+        return profilePage.isAddedFollowing(name);
     }
 
     public void unfollowing(){
@@ -193,9 +193,9 @@ public class Steps {
         profilePage.unfollowing();
     }
 
-    public boolean removeFollower(){
+    public boolean removeFollowing(String name){
         ProfilePage profilePage = new ProfilePage(driver);
         profilePage.openPage(PAGE_URL);
-        return profilePage.removeFollower();
+        return profilePage.removeFollowing(name);
     }
 }

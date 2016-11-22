@@ -44,4 +44,7 @@ public abstract class AbstractPage {
         wait.until(ExpectedConditions.elementToBeClickable(webElement));
     }
 
+    public void scrollToPage(WebElement webElement){
+        ((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView();", webElement);
+    }
 }

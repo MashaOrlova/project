@@ -1,9 +1,6 @@
 package pages;
 
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -64,7 +61,7 @@ public class ProfilePage extends AbstractPage {
     @FindBy(xpath = "//a[@title = 'Discover more']")
     private WebElement buttonDiscoverMore;
 
-    @FindBy(xpath = "//span[text() = 'Bill Gates']")
+    //@FindBy(xpath = "//span[text() = 'Bill Gates']")
     private WebElement buttonFollow;
 
     @FindBy(id = "following-container")
@@ -76,7 +73,7 @@ public class ProfilePage extends AbstractPage {
     @FindBy(id = "catalog-section-discover")
     private WebElement scrollDiscoverMore;
 
-    @FindBy(xpath = "//strong[text() = 'Bill Gates']")
+  //  @FindBy(xpath = "//strong[text() = 'Bill Gates']")
     private WebElement strongName;
 
     @FindBy(xpath = "//div[1]/ul/li/div/a[1]/span[text() = 'Following']")
@@ -92,7 +89,7 @@ public class ProfilePage extends AbstractPage {
     }
 
     public void addNewLanguage(String language, int indexProficiency){
-        ((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView();", scrollLanguage);
+        scrollToPage(scrollLanguage);
         btnAddNewLanguage.click();
         inputLanguages.sendKeys(language);
         selectlanguage.click();
@@ -109,7 +106,7 @@ public class ProfilePage extends AbstractPage {
     }
 
     public void removeLanguage(){
-        ((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView();", scrollLanguage);
+        scrollToPage(scrollLanguage);
         btnAddNewLanguage.click();
         btnRemoveLanguage.click();
         btnSaveLanguage.click();
@@ -128,14 +125,12 @@ public class ProfilePage extends AbstractPage {
     }
 
     public boolean isAddedNewPublication(){
-        WebDriverWait wait = new WebDriverWait(driver, 10);
         wait.until(ExpectedConditions.elementToBeClickable(editAddedNewPublication));
         editAddedNewPublication.click();
         return removePublication.isDisplayed();
     }
 
     public void removeAddedNewPublication(){
-        WebDriverWait wait = new WebDriverWait(driver, 10);
         wait.until(ExpectedConditions.elementToBeClickable(editAddedNewPublication));
         editAddedNewPublication.click();
         textareaDecription.click();
@@ -148,10 +143,11 @@ public class ProfilePage extends AbstractPage {
         return editAddedNewPublication.isDisplayed();
     }
 
-    public void addFollower(){
-        ((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView();", scrollFollowingContainer);
+    public void addFollowing(String name){
+        scrollToPage(scrollFollowingContainer);
         buttonDiscoverMore.click();
-        ((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView();", scrollDiscoverMore);
+        scrollToPage(scrollDiscoverMore);
+        buttonFollow = driver.findElement(By.xpath("//span[text() = '"+ name +"']"));
         buttonFollow.click();
         waitForPageLoaded(driver);
         buttonFollow.click();
@@ -159,20 +155,22 @@ public class ProfilePage extends AbstractPage {
         buttonFollowInPage.click();
     }
 
-    public boolean isAddedFollower(){
-        ((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView();", scrollFollowingContainer);
+    public boolean isAddedFollowing(String name){
+        scrollToPage(scrollFollowingContainer);
+        strongName = driver.findElement(By.xpath("//strong[text() = '"+ name +"']"));
         return strongName.isDisplayed();
     }
 
     public void unfollowing(){
-        ((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView();", scrollFollowingContainer);
+        scrollToPage(scrollFollowingContainer);
         wait.until(ExpectedConditions.elementToBeClickable(buttonUnfollowing));
         buttonUnfollowing.click();
     }
-    public boolean removeFollower(){
-        ((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView();", scrollFollowingContainer);
+    public boolean removeFollowing(String name){
+        scrollToPage(scrollFollowingContainer);
         buttonDiscoverMore.click();
-        ((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView();", scrollDiscoverMore);
+        scrollToPage(scrollDiscoverMore);
+        buttonFollow = driver.findElement(By.xpath("//span[text() = '"+ name +"']"));
         buttonFollow.click();
         waitForPageLoaded(driver);
         buttonFollow.click();
