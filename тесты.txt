@@ -1,0 +1,4 @@
+страницы: 
+ login
+ general         
+ home

@@ -31,7 +31,7 @@ public abstract class AbstractPage {
         try
         {
             wait.until(expectation);
-            Thread.sleep(2000);
+            Thread.sleep(4000);
         }
         catch(Throwable error)
         {

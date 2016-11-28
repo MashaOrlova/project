@@ -17,7 +17,7 @@ public class WDriver {
         if (null == driver){
             System.setProperty(WEBDRIVER_GECKO_DRIVER, GECKODRIVER_GECKODRIVER_EXE_PATH);
             driver = new FirefoxDriver();
-            driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
+            driver.manage().timeouts().pageLoadTimeout(70, TimeUnit.SECONDS);
             driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
             driver.manage().timeouts().setScriptTimeout(10, TimeUnit.SECONDS);
             driver.manage().window().maximize();
